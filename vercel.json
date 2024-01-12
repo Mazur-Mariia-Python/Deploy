@@ -1,0 +1,23 @@
+{
+
+    "builds": [{
+
+        "src": "Tobi/wsgi.py",
+
+        "use": "@vercel/python"
+
+    }],
+
+    "routes": [
+
+        {
+
+            "src": "/(.*)",
+            "dest": "Tobi/wsgi.py"
+
+        }
+
+    ]
+
+}
+
