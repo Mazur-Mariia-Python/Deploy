@@ -35,7 +35,7 @@ class SelectedGift(models.Model):
     """Sorting selected gifts from newest to oldest"""
     class Meta:
         ordering = ["-created_at"]
-        verbose_name_plural = "selected_gifts"
+        verbose_name_plural = "Selected gifts"
 
     def __str__(self):
         return str(self.name)

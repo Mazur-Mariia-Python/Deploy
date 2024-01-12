@@ -1,5 +1,6 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.utils import json
 from django.http import JsonResponse
 
@@ -8,6 +9,8 @@ from .functions import process_gift_picking
 from rest_framework import status
 import json
 from pydantic import ValidationError
+
+from .serializers import SelectedGiftSerializer
 from .validators import QuestionnaireAnswers
 
 
@@ -38,10 +41,10 @@ def selected_gifts_list(request):
         # Checking if the user is authenticated
         if not request.user.is_authenticated:
             return Response({"error": "Access denied. User is not authenticated."},
-                            status=403)
+                            status=status.HTTP_403_FORBIDDEN)
 
         # Receiving selected gifts for a specific user
         selected_gifts = SelectedGift.objects.filter(user=request.user)
         serializer = SelectedGiftSerializer(selected_gifts, many=True)
 
-        return Response(serializer.data, status=200)
+        return Response(serializer.data, status=status.HTTP_200_OK)
