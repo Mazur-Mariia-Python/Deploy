@@ -35,18 +35,16 @@ def api_load_response_data(request):
 
 
 @api_view(["GET"])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def selected_gifts_list(request):
+    if request.method == "GET":
+        # Checking if the user is authenticated
+        if not request.user.is_authenticated:
+            return Response({"error": "Access denied. User is not authenticated."},
+                            status=status.HTTP_403_FORBIDDEN)
 
-    selected_gifts = SelectedGift.objects.all()
-    serializer = SelectedGiftSerializer(selected_gifts, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-    # if request.method == "GET":
-    #     # # Checking if the user is authenticated
-    #     if not request.user.is_authenticated:
-    #         return Response({"error": "Access denied. User is not authenticated."},
-    #                         status=status.HTTP_403_FORBIDDEN)
-    #
-    #     # Receiving selected gifts for a specific user
-    #     selected_gifts = SelectedGift.objects.filter(user=request.user)
-    #     serializer = SelectedGiftSerializer(selected_gifts, many=True)
+        # Receiving selected gifts for a specific user
+        selected_gifts = SelectedGift.objects.filter(user=request.user)
+        serializer = SelectedGiftSerializer(selected_gifts, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
