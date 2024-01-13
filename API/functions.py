@@ -6,5 +6,3 @@ def process_gift_picking(questionnaire_answers):
     list_of_product_data = get_list_product_data(product_categories, int(questionnaire_answers['budget']))
 
     return list_of_product_data
-
-
