@@ -28,8 +28,8 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-i2i1n8c*=!y8&5
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 # DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', "deploy-tobi.onrender.com"]
