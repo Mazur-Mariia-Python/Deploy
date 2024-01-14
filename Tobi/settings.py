@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = "django-insecure-i2i1n8c*=!y8&5laf&go$j@_hpfxtj_gx%!b$^*7s0x)$!1^_u"
-# SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-i2i1n8c*=!y8&5laf&go$j@_hpfxtj_gx%!b$^*7s0x)$!1^_u")
-SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-i2i1n8c*=!y8&5laf&go$j@_hpfxtj_gx%!b$^*7s0x)$!1^_u")
+# SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -120,9 +120,9 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
+db_from_env = dj_database_url.config()
 
-DATABASES['default'].update(db_from_env)
+DATABASE_URL = DATABASES['default'].update(db_from_env)
 
 # DATABASE_URL = "postgres://tlsmrlrr:rvcbwhtG8Fg9KSr3w8kRGNWYdDPFI-LQ@balarama.db.elephantsql.com/tlsmrlrr"
 # Password validation
