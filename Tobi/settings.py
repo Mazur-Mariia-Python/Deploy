@@ -29,11 +29,18 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-i2i1n8c*=!y8&5
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = False
-# DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
+# DEBUG = False
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', "deploy-tobi.onrender.com"]
 
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '3cab605faf8975'
+EMAIL_HOST_PASSWORD = '8983c4d5c2e72e'
+EMAIL_PORT = '2525'
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Application definition
 
@@ -46,10 +53,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "API",
     "gift_finder",
     'corsheaders',
 ]
+
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -169,3 +178,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Stripe payment system settings
+STRIPE_PUBLIC_KEY = 'pk_test_51OV2bLAKPDAd55L4octtecddPTj4ZGloLsn0HJHGjtO0Kw0sQDVyWcBqtvUjfBZS3mxTD3GyxY1PLVGtUNvWXgwv008o55BXYi'
+STRIPE_SECRET_KEY = 'sk_test_51OV2bLAKPDAd55L4BArn0weu8mSzYuU1YhpfwKoiS6PNy81LVG3Ip7i8Z2UXCrwSv7FkO8oYkMavSRBDSy76MSaj00rq1ksN96'
+STRIPE_WEBHOOK_SECRET = 'whsec_42d19db89b86214a25bcf3a5857ea8cc52595c7ec1cf4e4f5669e08960bffb87'

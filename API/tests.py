@@ -1,16 +1,10 @@
-from django.test import TestCase
-import json
-from rest_framework.test import APIClient
-from pydantic import ValidationError
 from .validators import QuestionnaireAnswers
-
-
 from django.test import TestCase
 from rest_framework.test import APIClient
-from django.http import JsonResponse
 from rest_framework import status
 from pydantic import ValidationError
 import json
+
 
 class TestAPI(TestCase):
     def setUp(self):
@@ -50,9 +44,9 @@ class TestAPI(TestCase):
 class QuestionnaireAnswersTests(TestCase):
     def test_valid_data(self):
         user_answers = {
-            "budget": 55,
-            "male": 2,
-            "age": 58,
+            "budget": "55",
+            "male": "2",
+            "age": "58",
             "date_type": "Birthday",
             "hobbies": "sport",
             "related_gifts": "surprises and trinkets",
@@ -66,9 +60,9 @@ class QuestionnaireAnswersTests(TestCase):
 
     def test_invalid_budget(self):
         user_answers = {
-            "budget": -22,
-            "male": 2,
-            "age": 58,
+            "budget": 22,
+            "male": "2",
+            "age": "58",
             "date_type": "Birthday",
             "hobbies": "sport",
             "related_gifts": "surprises and trinkets",
@@ -80,9 +74,9 @@ class QuestionnaireAnswersTests(TestCase):
 
     def test_invalid_male(self):
         user_answers = {
-            "budget": 450,
+            "budget": "450",
             "male": 3,
-            "age": 66,
+            "age": "66",
             "date_type": "Birthday",
             "hobbies": "music",
             "related_gifts": "surprises and trinkets",
@@ -94,9 +88,9 @@ class QuestionnaireAnswersTests(TestCase):
 
     def test_invalid_age(self):
         user_answers = {
-            "budget": 120,
-            "male": 1,
-            "age": 0,
+            "budget": "120",
+            "male": "1",
+            "age": 38,
             "date_type": "Birthday",
             "hobbies": "sport",
             "related_gifts": "surprises and trinkets",
@@ -108,9 +102,9 @@ class QuestionnaireAnswersTests(TestCase):
 
     def test_invalid_date_type(self):
         user_answers = {
-            "budget": 120,
-            "male": 2,
-            "age": 47,
+            "budget": "120",
+            "male": "2",
+            "age": "47",
             "date_type": {1: "Birthday"},
             "hobbies": "sport",
             "related_gifts": "surprises and trinkets",
@@ -122,9 +116,9 @@ class QuestionnaireAnswersTests(TestCase):
 
     def test_invalid_hobbies(self):
         user_answers = {
-            "budget": 120,
-            "male": 2,
-            "age": 47,
+            "budget": "120",
+            "male": "2",
+            "age": "47",
             "date_type": "New Year",
             "hobbies": ["sport", "music"],
             "related_gifts": "surprises and trinkets",
@@ -136,12 +130,12 @@ class QuestionnaireAnswersTests(TestCase):
 
     def test_invalid_related_gifts(self):
         user_answers = {
-            "budget": 120,
-            "male": 2,
-            "age": 47,
+            "budget": "120",
+            "male": "2",
+            "age": "47",
             "date_type": "New Year",
             "hobbies": "music",
-            "related_gifts": 6,
+            "related_gifts": 4,
             "favorite_color": "violet",
         }
 
@@ -150,12 +144,12 @@ class QuestionnaireAnswersTests(TestCase):
 
     def test_invalid_favorite_color(self):
         user_answers = {
-            "budget": 120,
-            "male": 2,
-            "age": 47,
+            "budget": "120",
+            "male": "2",
+            "age": "47",
             "date_type": "New Year",
             "hobbies": "music",
-            "related_gifts": 6,
+            "related_gifts": "surprises and trinkets",
             "favorite_color": ("violet", "black"),
         }
 
