@@ -1,4 +1,8 @@
+from django.core.mail import send_mail
+from django.template.loader import get_template
+from Tobi import settings
 from gift_finder.functions import recommend_product_categories, get_list_product_data
+from gift_finder.models import SelectedGift
 
 
 def process_gift_picking(questionnaire_answers):
